@@ -5,14 +5,20 @@
  */
 package electronicpatientcard.Utils;
 
+import electronicpatientcard.Classes.VirtualPatient;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import ca.uhn.fhir.rest.client.api.ServerValidationModeEnum;
+import ca.uhn.fhir.rest.client.interceptor.LoggingInterceptor;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.IdType;
+import org.hl7.fhir.dstu3.model.Parameters;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.r4.model.api.IBaseBundle;
 
 /**
  *
@@ -62,6 +68,7 @@ public class DataContext {
 
     public TableRow getBasicData(Patient patient) {
 
+        String id = "";
         String name = "";
         String surName = "";
         String maidenName = "";
@@ -74,13 +81,61 @@ public class DataContext {
         surName = patient.getName().get(0).getFamily();
 
         birthDate = patient.getBirthDate() == null ? "" : patient.getBirthDate().toString();
+        id = patient.getId().substring(40, 76);
         if (patient.getName().size() > 1) {
             if (patient.getName().get(1).getUse().toString().equals("MAIDEN")) {
                 maidenName = patient.getName().get(1).getFamily();
             }
-
         }
 
-        return new TableRow(name, surName, maidenName, birthDate);
+        return new TableRow(id, name, surName, maidenName, birthDate);
+    }
+
+    VirtualPatient virtualPatient;
+
+    public VirtualPatient GetDetailedInfo(String patientId) {
+        iGenericClient.registerInterceptor(new LoggingInterceptor(true));
+
+        Parameters parameters = iGenericClient
+                .operation()
+                .onInstance(new IdType("Patient", patientId))
+                .named("$everything")
+                .withNoParameters(Parameters.class).useHttpGet()
+                .execute();
+
+        Bundle bundle = (Bundle) parameters.getParameterFirstRep().getResource();
+
+        do {
+            bundle.getEntry().forEach((entry) -> {
+                Resource resource = entry.getResource();
+                if (resource instanceof Patient) {
+                    Patient patient = (Patient) resource;
+                    String id = patient.getId().substring(40, 76);
+                    String firstName = patient.getName().get(0).getGiven().get(0).toString();
+                    String surName = patient.getName().get(0).getFamily();
+                    String city = patient.getAddress().get(0).getCity();
+                    String state = patient.getAddress().get(0).getState();
+                    String postalCode = patient.getAddress().get(0).getPostalCode();
+                    String country = patient.getAddress().get(0).getCountry();
+                    Date birthDate = patient.getBirthDate();
+                    String gender = patient.getGender().toString();
+                    String maidenName = "";
+                    String phone = patient.getTelecom().get(0).getValue().split(" ")[0];
+
+                    if (patient.getName().size() > 1) {
+                        if (patient.getName().get(1).getUse().toString().equals("MAIDEN")) {
+                            maidenName += patient.getName().get(1).getFamily();
+                        }
+                    }
+                    virtualPatient = new VirtualPatient(id, firstName, surName, maidenName, state, gender, phone, city, country, state, postalCode);
+                }
+            });
+            if (bundle.getLink(IBaseBundle.LINK_NEXT) != null) {
+                Bundle next = iGenericClient.loadPage().next(bundle).execute();
+                bundle = next;
+            }
+        } while (bundle.getLink(IBaseBundle.LINK_NEXT) != null);
+
+        return virtualPatient;
     }
 }

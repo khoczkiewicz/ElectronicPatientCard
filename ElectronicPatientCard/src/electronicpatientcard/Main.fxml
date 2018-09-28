@@ -9,6 +9,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="500" prefWidth="500" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electronicpatientcard.MainController">
     <children>
-        <TableView fx:id="tableView" prefHeight="500" prefWidth="500" />
+        <TableView fx:id="tableView" onMouseClicked="#mouseClick" prefHeight="500" prefWidth="500" />
     </children>
 </AnchorPane>

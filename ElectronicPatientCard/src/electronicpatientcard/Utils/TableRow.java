@@ -11,32 +11,41 @@ package electronicpatientcard.Utils;
  */
 public class TableRow {
 
-    private String firstName;
-    private final String familyName;
+    private String id;
+    private String name;
+    private final String surName;
     private final String maidenName;
-    private final String dateOfBirth;
+    private final String birthDate;
 
-    public TableRow(String firstName, String familyName, String maidenName, String dateOfBirth) {
-        this.firstName = firstName;
-        this.familyName = familyName;
+    public TableRow(String name, String surName, String maidenName, String birthDate) {
+        this.name = name;
+        this.surName = surName;
         this.maidenName = maidenName;
-        this.dateOfBirth = dateOfBirth;
+        this.birthDate = birthDate;
+    }
+
+    public TableRow(String id, String name, String surName, String maidenName, String birthDate) {
+        this.id = id;
+        this.name = name;
+        this.surName = surName;
+        this.maidenName = maidenName;
+        this.birthDate = birthDate;
+    }
+
+    public String getIdentificator() {
+        return id;
     }
 
     public String getFamilyName() {
-        return familyName;
+        return surName;
     }
 
     public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        return name;
     }
 
     public String getDateOfBirth() {
-        return dateOfBirth;
+        return birthDate;
     }
 
     public String getMaidenName() {

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="500" prefWidth="500" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electronicpatientcard.PatientCard">
+    <children>     
+        <GridPane layoutX="20" layoutY="20" prefHeight="200" prefWidth="700" styleClass="grid" stylesheets="@style.css">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100" minWidth="10.0" prefWidth="100" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="400" minWidth="10.0" prefWidth="300" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <StackPane GridPane.columnIndex="0" GridPane.rowIndex="0" >
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Imię" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label fx:id="firstName" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Nazwisko" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label fx:id="surName" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Nazwisko panieńskie" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Label fx:id="maidenName" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Data urodzenia" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <Label fx:id="birthDate" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Płeć" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <Label fx:id="gender" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Telefon" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <Label fx:id="phone" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Miasto" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <Label fx:id="city" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Kraj" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="7">
+                    <Label fx:id="country" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Stan" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="8">
+                    <Label fx:id="state" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+                <StackPane GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+                    <Label contentDisplay="CENTER" style="-fx-alignment: center;" text="Kod pocztowy" />
+                    <styleClass>
+                        <String fx:value="r-even" />
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-head" />
+                    </styleClass>
+                </StackPane>
+                <StackPane GridPane.columnIndex="1" GridPane.rowIndex="9">
+                    <Label fx:id="postalCode" />
+                    <styleClass>
+                        <String fx:value="row-elem" />
+                        <String fx:value="r-even" />
+                    </styleClass>
+                </StackPane>
+                
+            </children>
+        </GridPane>
+    </children>
+</AnchorPane>
