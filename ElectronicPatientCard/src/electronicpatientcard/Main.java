@@ -22,7 +22,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
         primaryStage.setTitle("Lista pacjentów");
-        primaryStage.setScene(new Scene(root, 500, 500));
+        primaryStage.setResizable(false);
+        primaryStage.setScene(new Scene(root, MainController.WIDTH, MainController.HEIGHT));
         primaryStage.show();
     }
 

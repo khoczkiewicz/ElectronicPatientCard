@@ -22,7 +22,8 @@ public class PatientCard extends Application {
 
     public void start(Stage window) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("PatientCard.fxml"));
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, MainController.WIDTH, MainController.HEIGHT);
+        window.setResizable(false);
         window.setScene(scene);
         window.show();
     }

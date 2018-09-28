@@ -140,4 +140,21 @@ public class DataContext {
 
         return virtualPatient;
     }
+    
+    public List<Patient> Search(String surName) {
+
+        Bundle bundle = new Bundle();
+        ArrayList<Patient> foundPatients = new ArrayList<>();
+
+        if (surName != null && surName != "") {
+            bundle = iGenericClient.search()
+                    .forResource(Patient.class)
+                    .count(20)
+                    .where(Patient.FAMILY.matches().value(surName))
+                    .returnBundle(Bundle.class).execute();
+        }
+
+        foundPatients = getPatientsFromBundle(bundle);
+        return foundPatients.size() != 0 ? foundPatients : this.GetPatients();
+    }
 }

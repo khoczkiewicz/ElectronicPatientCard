@@ -5,10 +5,26 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500" prefWidth="500" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electronicpatientcard.MainController">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="electronicpatientcard.MainController">
     <children>
-        <TableView fx:id="tableView" onMouseClicked="#mouseClick" prefHeight="500" prefWidth="500" />
+        <TableView fx:id="tableView" onMouseClicked="#mouseClick" prefWidth="600" prefHeight="750" />
+        
+        <Button fx:id="button" layoutX="500" layoutY="750" mnemonicParsing="false" onMouseClicked="#search" prefHeight="50" prefWidth="100" text="Szukaj" >
+            <font>
+                <Font size="20"/>
+            </font>
+        </Button>
+        
+        <Label layoutX="0" layoutY="750" prefHeight="50" prefWidth="100" text="Nazwisko">
+            <font>
+                <Font size="20"/>
+            </font>
+        </Label>
+        
+        <TextField fx:id="textField" layoutX="100" layoutY="750" prefHeight="50" prefWidth="400" />
+        
     </children>
 </AnchorPane>

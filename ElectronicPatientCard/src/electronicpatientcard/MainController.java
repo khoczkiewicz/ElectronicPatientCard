@@ -9,6 +9,7 @@ import electronicpatientcard.Utils.DataContext;
 import electronicpatientcard.Utils.TableRow;
 import electronicpatientcard.Classes.VirtualPatient;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,10 +23,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.utilities.TextFile;
 
 /**
  * FXML Controller class
@@ -33,6 +37,9 @@ import javafx.util.Callback;
  * @author root
  */
 public class MainController implements Initializable, Runnable {
+
+    public static final int WIDTH = 600;
+    public static final int HEIGHT = 800;
 
     /**
      * Initializes the controller class.
@@ -76,21 +83,39 @@ public class MainController implements Initializable, Runnable {
 
     @FXML
     public void mouseClick(MouseEvent event) throws IOException {
-        TablePosition tablePosition = tableView.getSelectionModel().getSelectedCells().get(0);
+        try {
+            TablePosition tablePosition = tableView.getSelectionModel().getSelectedCells().get(0);
 
-        virtualPatient = dataContext.GetDetailedInfo(observableList.get(tablePosition.getRow()).getIdentificator());
+            virtualPatient = dataContext.GetDetailedInfo(observableList.get(tablePosition.getRow()).getIdentificator());
 
-        Stage stage = new Stage();
+            Stage stage = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientCard.fxml"));
-        Parent root = loader.load();
-        PatientCard patientCard = loader.getController();
-        Scene scene = new Scene(root, 800, 600);
-        stage.setScene(scene);
-        stage.setTitle("Karta pacjenta");
-        stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PatientCard.fxml"));
+            Parent root = loader.load();
+            PatientCard patientCard = loader.getController();
+            Scene scene = new Scene(root, WIDTH, HEIGHT);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Karta pacjenta");
+            stage.show();
 
-        patientCard.getPatient(virtualPatient);
+            patientCard.getPatient(virtualPatient);
+        } catch (Exception ex) {
+            System.out.println("");
+        }
+    }
+
+    @FXML
+    TextField textField;
+    
+    @FXML
+    public void search() {
+        List<Patient> searchedPatients = dataContext.Search(textField.getText());
+        observableList.clear();
+        searchedPatients.forEach((patient) -> {
+            observableList.add(dataContext.getBasicData(patient));
+        });
+        tableView.setItems(observableList);
     }
 
     @Override
