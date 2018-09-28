@@ -18,12 +18,13 @@ public class VirtualPatient {
     private String birthDate;
     private String gender;
     private String phone;
+    private String address;
     private String city;
     private String country;
     private String state;
     private String postalCode;
 
-    public VirtualPatient(String id, String firstName, String surName, String maidenName, String birthDate, String gender, String phone, String city, String country, String state, String postalCode) {
+    public VirtualPatient(String id, String firstName, String surName, String maidenName, String birthDate, String gender, String phone, String address, String city, String country, String state, String postalCode) {
         this.id = id;
         this.firstName = firstName;
         this.surName = surName;
@@ -31,6 +32,7 @@ public class VirtualPatient {
         this.birthDate = birthDate;
         this.gender = gender;
         this.phone = phone;
+        this.address = address;
         this.city = city;
         this.country = country;
         this.state = state;
@@ -189,5 +191,19 @@ public class VirtualPatient {
      */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

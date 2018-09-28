@@ -13,6 +13,7 @@ import ca.uhn.fhir.rest.client.interceptor.LoggingInterceptor;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.IdType;
 import org.hl7.fhir.dstu3.model.Parameters;
@@ -110,24 +111,25 @@ public class DataContext {
                 Resource resource = entry.getResource();
                 if (resource instanceof Patient) {
                     Patient patient = (Patient) resource;
+                    String postalCode = patient.getAddress().get(0).getPostalCode();
+                    String phone = patient.getTelecom().get(0).getValue().split(" ")[0];
                     String id = patient.getId().substring(40, 76);
+                    String country = patient.getAddress().get(0).getCountry();
+                    Date birthDate = patient.getBirthDate();
                     String firstName = patient.getName().get(0).getGiven().get(0).toString();
                     String surName = patient.getName().get(0).getFamily();
                     String city = patient.getAddress().get(0).getCity();
+                    String address = patient.getAddress().get(0).getLine().get(0).toString();
                     String state = patient.getAddress().get(0).getState();
-                    String postalCode = patient.getAddress().get(0).getPostalCode();
-                    String country = patient.getAddress().get(0).getCountry();
-                    Date birthDate = patient.getBirthDate();
                     String gender = patient.getGender().toString();
                     String maidenName = "";
-                    String phone = patient.getTelecom().get(0).getValue().split(" ")[0];
 
                     if (patient.getName().size() > 1) {
                         if (patient.getName().get(1).getUse().toString().equals("MAIDEN")) {
                             maidenName += patient.getName().get(1).getFamily();
                         }
                     }
-                    virtualPatient = new VirtualPatient(id, firstName, surName, maidenName, state, gender, phone, city, country, state, postalCode);
+                    virtualPatient = new VirtualPatient(id, firstName, surName, maidenName, birthDate.toGMTString(), gender, phone, address, city, country, state, postalCode);
                 }
             });
             if (bundle.getLink(IBaseBundle.LINK_NEXT) != null) {

@@ -38,6 +38,8 @@ public class PatientCard extends Application {
     @FXML
     Label gender;
     @FXML
+    Label address;
+    @FXML
     Label phone;
     @FXML
     Label city;
@@ -47,6 +49,8 @@ public class PatientCard extends Application {
     Label state;
     @FXML
     Label postalCode;
+    @FXML
+    Label street;
 
     public void getPatient(VirtualPatient virtualPatient) {
         this.firstName.setText(virtualPatient.getFirstName());
@@ -54,6 +58,7 @@ public class PatientCard extends Application {
         this.maidenName.setText(virtualPatient.getMaidenName());
         this.birthDate.setText(virtualPatient.getBirthDate());
         this.gender.setText(virtualPatient.getGender());
+        this.address.setText(virtualPatient.getAddress());
         this.phone.setText(virtualPatient.getPhone());
         this.city.setText(virtualPatient.getCity());
         this.country.setText(virtualPatient.getCountry());
