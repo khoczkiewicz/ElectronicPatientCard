@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
@@ -20,6 +21,10 @@ import javafx.stage.Stage;
  */
 public class PatientCard extends Application {
 
+    @FXML
+    GridPane gridPane;
+
+    @Override
     public void start(Stage window) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("PatientCard.fxml"));
         Scene scene = new Scene(root, MainController.WIDTH, MainController.HEIGHT);
@@ -66,4 +71,6 @@ public class PatientCard extends Application {
         this.state.setText(virtualPatient.getState());
         this.postalCode.setText(virtualPatient.getPostalCode());
     }
+
+    @FXML GridPane timeline;
 }

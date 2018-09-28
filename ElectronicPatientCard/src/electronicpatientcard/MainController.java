@@ -9,7 +9,6 @@ import electronicpatientcard.Utils.DataContext;
 import electronicpatientcard.Utils.TableRow;
 import electronicpatientcard.Classes.VirtualPatient;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,7 +28,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.utilities.TextFile;
 
 /**
  * FXML Controller class
@@ -57,15 +55,19 @@ public class MainController implements Initializable, Runnable {
 
         TableColumn<TableRow, String> name = new TableColumn<>("Imię");
         name.setCellValueFactory(new PropertyValueFactory("firstName"));
+        name.setPrefWidth(100);
 
         TableColumn<TableRow, String> surName = new TableColumn<>("Nazwisko");
         surName.setCellValueFactory(new PropertyValueFactory("familyName"));
+        surName.setPrefWidth(100);
 
         TableColumn<TableRow, String> maidenName = new TableColumn<>("Nazwisko panieńskie");
         maidenName.setCellValueFactory(new PropertyValueFactory("maidenName"));
+        maidenName.setPrefWidth(150);
 
         TableColumn<TableRow, String> birthDate = new TableColumn<>("Data urodzenia");
         birthDate.setCellValueFactory(new PropertyValueFactory<>("dateOfBirth"));
+        birthDate.setPrefWidth(250);
 
         tableView.setEditable(false);
         tableView.setSortPolicy(new CallbackImpl());
@@ -100,14 +102,15 @@ public class MainController implements Initializable, Runnable {
             stage.show();
 
             patientCard.getPatient(virtualPatient);
-        } catch (Exception ex) {
+
+        } catch (IOException ex) {
             System.out.println("");
         }
     }
 
     @FXML
     TextField textField;
-    
+
     @FXML
     public void search() {
         List<Patient> searchedPatients = dataContext.Search(textField.getText());
